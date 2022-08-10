@@ -3,32 +3,24 @@ import React from "react";
 
 interface AppState {
   apolloClient: ApolloClient<NormalizedCacheObject>;
-  lensConfig?: {
-    accessToken: string;
-    refreshToken: string;
-  };
 }
 
-type SetLensConfig = {
-  type: AppActionType.SetLensConfig;
-  payload: {
-    accessToken: string;
-    refreshToken: string;
-  };
+type UpdateApolloClient = {
+  type: AppActionType.UpdateApolloClient;
+  payload: ApolloClient<NormalizedCacheObject>;
 };
 
-type AppAction = SetLensConfig;
+type AppAction = UpdateApolloClient;
 
 export enum AppActionType {
-  SetLensConfig,
+  UpdateApolloClient,
 }
 
 export const appReducer: React.Reducer<AppState, AppAction> = (state, action) => {
   switch (action.type) {
-    case AppActionType.SetLensConfig:
+    case AppActionType.UpdateApolloClient:
       return {
-        apolloClient: state.apolloClient,
-        lensConfig: action.payload,
+        apolloClient: action.payload,
       };
   }
 };

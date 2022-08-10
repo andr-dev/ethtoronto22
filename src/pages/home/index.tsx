@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { ApolloClient, ApolloLink, HttpLink, InMemoryCache, gql } from "@apollo/client";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -90,8 +90,26 @@ const Home: React.FC = () => {
           <button
             onClick={(): void => {
               login().then((data) => {
-                dispatch({ type: AppActionType.SetLensConfig, payload: data });
-                navigate("/profile");
+                const authLink = new ApolloLink((operation, forward) => {
+                  // Use the setContext method to set the HTTP headers.
+                  operation.setContext({
+                    headers: {
+                      "x-access-token": data.accessToken ? `Bearer ${data.accessToken}` : "",
+                    },
+                  });
+
+                  // Call the next link in the middleware chain.
+                  return forward(operation);
+                });
+
+                const apolloClient = new ApolloClient({
+                  link: authLink.concat(new HttpLink({ uri: "https://api-mumbai.lens.dev/" })),
+                  cache: new InMemoryCache(),
+                });
+
+                dispatch({ type: AppActionType.UpdateApolloClient, payload: apolloClient });
+                // TODO: HARD CODEDE
+                navigate("/profile/hacker1");
               });
             }}
             className="m-auto widget-button widget-button-large"
