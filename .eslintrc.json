@@ -1,0 +1,29 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "jsx": true,
+        "useJSXTextNode": true
+    },
+    "extends": [
+        "plugin:@typescript-eslint/recommended",
+        "plugin:import/recommended",
+        "plugin:import/typescript",
+        "prettier", // Use eslint-config-prettier to disable prettier conflicting ESLint rules
+        "plugin:prettier/recommended" // Use eslint-plugin-prettier to display prettier errors as ESLint errors
+    ],
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "rules": {
+        "@typescript-eslint/explicit-function-return-type": "error",
+        "@typescript-eslint/no-empty-function": "error",
+        "@typescript-eslint/no-explicit-any": "error",
+        "@typescript-eslint/no-unused-vars": "error",
+        "import/no-unused-modules": [
+            "error",
+            {
+                "unusedExports": true
+            }
+        ]
+    }
+}
