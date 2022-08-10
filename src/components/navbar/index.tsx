@@ -1,16 +1,13 @@
 import { Outlet } from "react-router-dom";
 
-import ThemeToggle from "../themeToggle";
-
 interface NavbarProps {
-  themeToggler: () => void;
+  phantom?: string;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ themeToggler }) => {
+const Navbar: React.FC<NavbarProps> = ({}) => {
   return (
     <>
       <div>navbar</div>
-      <ThemeToggle themeToggler={themeToggler} />
       <Outlet />
     </>
   );
