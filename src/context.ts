@@ -1,14 +1,37 @@
-import { ApolloClient, InMemoryCache } from "@apollo/client";
+import { ApolloClient, InMemoryCache, NormalizedCacheObject } from "@apollo/client";
 import React from "react";
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface AppState {}
+interface AppState {
+  apolloClient: ApolloClient<NormalizedCacheObject>;
+  lensConfig?: {
+    accessToken: string;
+    refreshToken: string;
+  };
+}
 
-type AppAction = {
-  apolloClient: ApolloClient<InMemoryCache>;
+type SetLensConfig = {
+  type: AppActionType.SetLensConfig;
+  payload: {
+    accessToken: string;
+    refreshToken: string;
+  };
 };
 
-export const appReducer: React.Reducer<AppState, AppAction> = (state) => state;
+type AppAction = SetLensConfig;
+
+export enum AppActionType {
+  SetLensConfig,
+}
+
+export const appReducer: React.Reducer<AppState, AppAction> = (state, action) => {
+  switch (action.type) {
+    case AppActionType.SetLensConfig:
+      return {
+        apolloClient: state.apolloClient,
+        lensConfig: action.payload,
+      };
+  }
+};
 
 interface AppContext {
   state: AppState;
