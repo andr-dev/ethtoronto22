@@ -83,9 +83,7 @@ const Home: React.FC = () => {
         <div className="max-w-xl flex flex-col items-center text-center m-auto">
           <p className="text-indigo-500 md:text-lg xl:text-xl font-semibold mb-4 md:mb-6">Introducing</p>
 
-          <h1 className="text-black-800 text-3xl sm:text-4xl md:text-5xl font-bold mb-8 md:mb-12">
-            Revolutionary way to build the web
-          </h1>
+          <h1 className="text-black-800 text-3xl sm:text-4xl md:text-5xl font-bold mb-6 md:mb-8">Zen</h1>
 
           <button
             onClick={(): void => {
@@ -109,7 +107,7 @@ const Home: React.FC = () => {
 
                 dispatch({ type: AppActionType.UpdateApolloClient, payload: apolloClient });
                 // TODO: HARD CODEDE
-                navigate("/profile/hacker1");
+                navigate("/profile/ethtoronto2022_hacker1");
               });
             }}
             className="m-auto widget-button widget-button-large"
